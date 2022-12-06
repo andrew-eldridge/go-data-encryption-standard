@@ -8,7 +8,7 @@ import (
 )
 
 type KeyRes struct {
-	key string
+	Key string `json:"key"`
 }
 
 func randBits(nBits int) string {
@@ -30,17 +30,16 @@ func handleGetKey(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		key := getKey()
 		fmt.Println(key)
-		res, err := json.Marshal(KeyRes{
-			key: key,
+		res, err := json.Marshal(&KeyRes{
+			Key: key,
 		})
-		fmt.Println(res)
+		fmt.Println(string(res))
 		if err != nil {
 			fmt.Println(err.Error())
 			http.Error(w, "Unable to marshal JSON response.", http.StatusInternalServerError)
 		}
 		w.Header().Set("Content-Type", "application/json")
-		//_, err = w.Write(res)
-		json.NewEncoder(w).Encode(res)
+		_, err = w.Write(res)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
