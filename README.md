@@ -18,7 +18,7 @@ go run .
 ```
 
 ## Endpoints
-<b>Base address: `127.0.0.1:5000/api/v1`</b>
+<b>Base address: `127.0.0.1:8080/api/v1`</b>
 ### /key {GET}
 Provides a random 64-bit key to be used for input in the encryption/decryption functions.
 
